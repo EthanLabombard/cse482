@@ -1,14 +1,1 @@
-# Recommender with precomputed neighbors
-
-1. Install dependencies:
-   pip install -r requirements.txt
-
-2. Download MovieLens 100k and preprocess:
-   python src/download_movielens.py
-   python src/preprocess.py
-
-3. Start Streamlit:
-   streamlit run src/app.py
-
-The preprocess step computes top-K user neighbors and item neighbors and saves them to artifacts/.
-The Streamlit app loads these artifacts for instant recommendations.
+This project presents a movie recommendation system built using Streamlit and the MovieLens dataset. This application allows users to view rated movies, receive movie recommendations, and find other users with similar movie tastes. The goals of this project were to display items a user has previously rated, generate movie recommendations for unrated items, and recommend similar users based on rating patterns. The process began by collecting the data and completing some necessary data preprocessing, including a train test split and addressing potential missingness. The next step was to develop the recommendation algorithms by calculating both, how similar the users are to each other, and how similar the movies are to each other. Finally, a front end was built in Streamlit that allows for the selection of a user, then runs the algorithms to see what movies most closely align with the chosen user’s preferences. The final results of this project is an app that displays movie recommendations for a chosen user in two different ways. First based on the movies that are most similar to the positively rated movies of the chosen user. Then second by the positively rated movies by the users that are most similar to the selected user. In addition, this app allows for the adjustment of the number of movies that should be recommended by the app. Throughout the process of this project I learned a lot about different similarity algorithms and the different ways that similar movies could be chosen. I also learned about some different python packages that I had never tried before like sklearn and pyspark. Some future improvements that could be made would be to implement different aspects of the movies that were not already included as part of this dataset. For example adding the genre and the year of the movie could help fine tune this model by narrowing down the preferences of the user.
