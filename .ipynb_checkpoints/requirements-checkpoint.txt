@@ -1,0 +1,9 @@
+pandas
+numpy
+scipy
+scikit-learn
+pyspark>=3.0.0
+streamlit
+implicit    # optional, for matrix factorization experiments
+matplotlib
+tqdm
