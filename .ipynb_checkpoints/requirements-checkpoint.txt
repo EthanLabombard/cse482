@@ -1,9 +1,0 @@
-pandas
-numpy
-scipy
-scikit-learn
-pyspark>=3.0.0
-streamlit
-implicit
-matplotlib
-tqdm
