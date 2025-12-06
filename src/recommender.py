@@ -1,21 +1,14 @@
-# recommender.py
 import numpy as np
 import pandas as pd
 from scipy.sparse import csr_matrix
 from local_similarity import build_user_item_matrix, compute_cosine_similarity_sparse
 
 def predict_user_based(user_id, item_id, user_index, item_index, rating_matrix, user_sim, k=20, global_mean=None):
-    """
-    Weighted average of top-k similar users who rated the item.
-    user_sim: user-user similarity matrix (n_users x n_users)
-    rating_matrix: csr_matrix (n_users x n_items)
-    """
     if user_id not in user_index or item_id not in item_index:
         return global_mean if global_mean is not None else 3.0
     u_idx = user_index[user_id]
     i_idx = item_index[item_id]
     sim_vec = user_sim[u_idx]
-    # find users who rated item
     col = rating_matrix[:, i_idx].toarray().ravel()
     rated_by = np.where(col > 0)[0]
     if len(rated_by) == 0:
@@ -29,9 +22,6 @@ def predict_user_based(user_id, item_id, user_index, item_index, rating_matrix, 
     return (top_sims @ ratings) / (np.abs(top_sims).sum())
 
 def predict_item_based(user_id, item_id, user_index, item_index, rating_matrix, item_sim, k=20, global_mean=None):
-    """
-    Weighted average of user's ratings on similar items.
-    """
     if user_id not in user_index or item_id not in item_index:
         return global_mean if global_mean is not None else 3.0
     u_idx = user_index[user_id]
@@ -49,8 +39,6 @@ def predict_item_based(user_id, item_id, user_index, item_index, rating_matrix, 
     return (top_sims @ top_ratings) / np.abs(top_sims).sum()
 
 def recommend_for_user_userbased(user_id, user_index, item_index, rating_matrix, user_sim, top_n=10):
-    """Return top_n (itemId, pred_rating) for a user"""
-    # compute predictions for items not rated
     inv_item_index = {v:k for k,v in item_index.items()}
     u_idx = user_index[user_id]
     user_row = rating_matrix[u_idx].toarray().ravel()

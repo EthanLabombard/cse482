@@ -1,4 +1,3 @@
-# data_prep.py
 import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -15,7 +14,6 @@ def load_local(data_dir="data"):
     return ratings, movies
 
 def train_test_split_by_user(ratings, test_size=0.2, seed=42):
-    # For each user, hold out a fraction of their ratings for test (scikit-learn stratified by user)
     train_list = []
     test_list = []
     grouped = ratings.groupby('userId')
